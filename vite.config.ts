@@ -16,6 +16,21 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-
+  build: {
+    target: 'es2015',
+    minify: 'terser',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'motion-vendor': ['motion'],
+          'mui-vendor': ['@mui/material', '@mui/icons-material'],
+          'radix-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-tooltip'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+  },
   assetsInclude: ['**/*.svg', '**/*.csv'],
 })
